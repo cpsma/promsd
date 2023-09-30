@@ -35,4 +35,11 @@ class ScrapesControllerTest < ActionDispatch::IntegrationTest
       }
     ], JSON.parse(response.body)
   end
+
+  test "can register a scrape" do
+    post scrapes_path, params: { stack: "db", service: "mysql", target: "192.168.1.3" }
+
+    assert_equal "Scrape registered for 192.168.1.3 (db/mysql)",
+      JSON.parse(response.body)["message"]
+  end
 end

@@ -5,6 +5,13 @@ class ScrapesController < ApplicationController
     @scrapes = Scrape.includes(:stack, :service).order("stacks.name").order("services.name")
   end
 
+  def create
+    stack, service, target = Scrape.register(
+      stack: params[:stack], service: params[:service], target: params[:target]
+    )
+    render json: { message: "Scrape registered for #{params[:target]} (#{params[:stack]}/#{params[:service]})" }
+  end
+
   private
 
   def set_default_response_format

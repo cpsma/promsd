@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "scrapes#index"
 
-  resources :scrapes, only: %i[index]
+  resources :scrapes, only: %i[index create]
   resources :stacks, only: %i[destroy], param: :name
 end
