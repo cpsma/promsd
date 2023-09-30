@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+app_node:
+  job: node
+  ip_address: 192.168.1.1
+
+monitor_node:
+  job: node
+  ip_address: 192.168.1.2
+
+monitor_prometheus:
+  job: prometheus
+  ip_address: 192.168.1.2
