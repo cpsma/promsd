@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+db_node_exporter:
+  service: node_exporter
+  stack: db
+
+db_mysql:
+  service: mysql
+  stack: db
+
+monitoring_node_exporter:
+  service: node_exporter
+  stack: monitoring
+
+monitoring_prometheus:
+  service: prometheus
+  stack: monitoring

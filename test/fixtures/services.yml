@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+node_exporter:
+  name: node-exporter
+  port: 9100
+
+mysql:
+  name: mysql
+  port: 3306
+
+prometheus:
+  name: prometheus
+  port: 9090

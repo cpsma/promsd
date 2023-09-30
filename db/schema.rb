@@ -10,21 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_30_145149) do
-  create_table "jobs", force: :cascade do |t|
+ActiveRecord::Schema[7.0].define(version: 2023_09_30_190937) do
+  create_table "scrape_targets", force: :cascade do |t|
+    t.integer "target_id", null: false
+    t.integer "scrape_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["scrape_id"], name: "index_scrape_targets_on_scrape_id"
+    t.index ["target_id"], name: "index_scrape_targets_on_target_id"
+  end
+
+  create_table "scrapes", force: :cascade do |t|
+    t.integer "service_id", null: false
+    t.integer "stack_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["service_id"], name: "index_scrapes_on_service_id"
+    t.index ["stack_id"], name: "index_scrapes_on_stack_id"
+  end
+
+  create_table "services", force: :cascade do |t|
     t.string "name"
     t.string "port"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stacks", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "targets", force: :cascade do |t|
-    t.integer "job_id", null: false
     t.string "ip_address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["job_id"], name: "index_targets_on_job_id"
   end
 
-  add_foreign_key "targets", "jobs"
+  add_foreign_key "scrape_targets", "scrapes"
+  add_foreign_key "scrape_targets", "targets"
+  add_foreign_key "scrapes", "services"
+  add_foreign_key "scrapes", "stacks"
 end

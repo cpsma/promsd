@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  target: db1
+  scrape: db_node_exporter
+
+two:
+  target: db2
+  scrape: db_node_exporter
+
+three:
+  target: db1
+  scrape: db_mysql
+
+four:
+  target: monitor1
+  scrape: monitoring_node_exporter
+
+five:
+  target: monitor1
+  scrape: monitoring_prometheus
