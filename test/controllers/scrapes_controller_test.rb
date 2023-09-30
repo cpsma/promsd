@@ -2,7 +2,7 @@ require "test_helper"
 
 class ScrapesControllerTest < ActionDispatch::IntegrationTest
   test "returns a list of scrapes" do
-    get "/"
+    get scrapes_path
 
     assert_equal [
       {
@@ -34,5 +34,5 @@ class ScrapesControllerTest < ActionDispatch::IntegrationTest
         }
       }
     ], JSON.parse(response.body)
-  end 
+  end
 end

@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   root "scrapes#index"
 
   resources :scrapes, only: %i[index]
+  resources :stacks, only: %i[destroy], param: :name
 end
