@@ -17,4 +17,11 @@ class StacksControllerTest < ActionDispatch::IntegrationTest
     assert_equal "The stack 'db' and its scrapes have been deleted",
       JSON.parse(response.body)["message"]
   end
+
+  test "returns a message when trying to delete a stack that does not exist" do
+    delete stack_path("foo")
+
+    assert_equal "The stack 'foo' does not exist",
+      JSON.parse(response.body)["message"] 
+  end
 end
