@@ -9,31 +9,31 @@ class ScrapeTest < ActiveSupport::TestCase
 
   test "registering a scrape with a stack that already exists does not create a new stack" do
     assert_no_difference "Stack.count" do
-      Scrape.register(stack: @stack.name, service: @service.name, target: @target)
+      Scrape.register(stack_name: @stack.name, service_name: @service.name, target_address: @target)
     end
   end 
 
   test "registering a scrape with a stack that does not exist creates a new stack" do
     assert_difference "Stack.count" do
-      Scrape.register(stack: "ci", service: @service.name, target: "192.168.1.30")
+      Scrape.register(stack_name: "ci", service_name: @service.name, target_address: "192.168.1.30")
     end 
   end
 
   test "registering a scrape for a service that does not exist raises a ServiceNotImplementedError" do
     assert_raises ServiceNotImplementedError do
-      Scrape.register(stack: @stack.name, service: "nonexistent", target: @target) 
+      Scrape.register(stack_name: @stack.name, service_name: "nonexistent", target_address: @target) 
     end
   end
 
   test "registering a scrape for a service and a stack that already exists does not create a new scrape" do
     assert_no_difference "Scrape.count" do
-      Scrape.register(stack: @stack.name, service: @service.name, target: @target)
+      Scrape.register(stack_name: @stack.name, service_name: @service.name, target_address: @target)
     end
   end
 
   test "registering a scrape for a service and a stack that does not exist creates a new scrape" do
     assert_difference "Scrape.count" do
-      Scrape.register(stack: "dns", service: @service.name, target: @target)
+      Scrape.register(stack_name: "dns", service_name: @service.name, target_address: @target)
     end
   end
 
@@ -41,19 +41,19 @@ class ScrapeTest < ActiveSupport::TestCase
     target = targets(:db1)
 
     assert_no_difference "Target.count" do
-      Scrape.register(stack: "db-cluster", service: @service.name, target: target.ip_address) 
+      Scrape.register(stack_name: "db-cluster", service_name: @service.name, target_address: target.ip_address) 
     end
   end
 
   test "registering a target scrape with a new target creates a new target" do
     assert_difference "Target.count" do
-      Scrape.register(stack: @stack.name, service: @service.name, target: @target) 
+      Scrape.register(stack_name: @stack.name, service_name: @service.name, target_address: @target) 
     end
   end
 
   test "registering a scrape creates a new scrape target" do
     assert_difference "ScrapeTarget.count" do
-      Scrape.register(stack: @stack.name, service: @service.name, target: @target)  
+      Scrape.register(stack_name: @stack.name, service_name: @service.name, target_address: @target)  
     end
   end
 end

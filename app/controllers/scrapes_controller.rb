@@ -7,7 +7,7 @@ class ScrapesController < ApplicationController
 
   def create
     stack, service, target = Scrape.register(
-      stack: params[:stack], service: params[:service], target: params[:target]
+      stack_name: params[:stack], service_name: params[:service], target_address: params[:target]
     )
     render json: { message: "Scrape registered for #{params[:target]} (#{params[:stack]}/#{params[:service]})" }
   rescue ActiveRecord::RecordNotUnique
