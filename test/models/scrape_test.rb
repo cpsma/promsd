@@ -19,6 +19,12 @@ class ScrapeTest < ActiveSupport::TestCase
     end 
   end
 
+  test "registering a scrape for a service that does not exist raises a ServiceNotImplementedError" do
+    assert_raises ServiceNotImplementedError do
+      Scrape.register(stack: @stack.name, service: "nonexistent", target: @target) 
+    end
+  end
+
   test "registering a scrape for a service and a stack that already exists does not create a new scrape" do
     assert_no_difference "Scrape.count" do
       Scrape.register(stack: @stack.name, service: @service.name, target: @target)

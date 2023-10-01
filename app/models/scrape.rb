@@ -12,5 +12,7 @@ class Scrape < ApplicationRecord
     scrape = Scrape.find_or_create_by!(stack: stack, service: service)
     scrape_target = ScrapeTarget.create!(scrape: scrape, target: target)
     [stack, service, target]
+  rescue ActiveRecord::RecordNotFound
+    raise ServiceNotImplementedError
   end
 end

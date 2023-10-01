@@ -12,6 +12,8 @@ class ScrapesController < ApplicationController
     render json: { message: "Scrape registered for #{params[:target]} (#{params[:stack]}/#{params[:service]})" }
   rescue ActiveRecord::RecordNotUnique
     render json: { message: "Scrape already registered for #{params[:target]} (#{params[:stack]}/#{params[:service]})"}
+  rescue ServiceNotImplementedError
+    render json: { message: "The service '#{params[:service]}' has not been implemented" }
   end
 
   private

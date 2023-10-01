@@ -53,4 +53,14 @@ class ScrapesControllerTest < ActionDispatch::IntegrationTest
     assert_equal "Scrape already registered for #{target.ip_address} (#{stack.name}/#{service.name})",
       JSON.parse(response.body)["message"]
   end
+
+  test "returns a message if the service for the scrape does not exist" do
+    stack = stacks(:db)
+    target = targets(:db1)
+    
+    post scrapes_path, params: { stack: stack.name, service: "nonexistent", target: target.ip_address }
+
+    assert_equal "The service 'nonexistent' has not been implemented",
+      JSON.parse(response.body)["message"] 
+  end
 end
