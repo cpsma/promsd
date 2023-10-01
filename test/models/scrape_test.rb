@@ -35,7 +35,7 @@ class ScrapeTest < ActiveSupport::TestCase
     target = targets(:db1)
 
     assert_no_difference "Target.count" do
-      Scrape.register(stack: @stack.name, service: @service.name, target: target.ip_address) 
+      Scrape.register(stack: "db-cluster", service: @service.name, target: target.ip_address) 
     end
   end
 

@@ -10,6 +10,8 @@ class ScrapesController < ApplicationController
       stack: params[:stack], service: params[:service], target: params[:target]
     )
     render json: { message: "Scrape registered for #{params[:target]} (#{params[:stack]}/#{params[:service]})" }
+  rescue ActiveRecord::RecordNotUnique
+    render json: { message: "Scrape already registered for #{params[:target]} (#{params[:stack]}/#{params[:service]})"}
   end
 
   private

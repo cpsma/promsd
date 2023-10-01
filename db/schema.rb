@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_30_190937) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_30_224542) do
   create_table "scrape_targets", force: :cascade do |t|
     t.integer "target_id", null: false
     t.integer "scrape_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["scrape_id"], name: "index_scrape_targets_on_scrape_id"
+    t.index ["target_id", "scrape_id"], name: "index_scrape_targets_on_target_id_and_scrape_id", unique: true
     t.index ["target_id"], name: "index_scrape_targets_on_target_id"
   end
 

@@ -42,4 +42,15 @@ class ScrapesControllerTest < ActionDispatch::IntegrationTest
     assert_equal "Scrape registered for 192.168.1.3 (db/mysql)",
       JSON.parse(response.body)["message"]
   end
+
+  test "returns a message if the scrape has already been registered" do
+    stack = stacks(:db)
+    service = services(:mysql)
+    target = targets(:db1)
+    
+    post scrapes_path, params: { stack: stack.name, service: service.name, target: target.ip_address }
+
+    assert_equal "Scrape already registered for #{target.ip_address} (#{stack.name}/#{service.name})",
+      JSON.parse(response.body)["message"]
+  end
 end
